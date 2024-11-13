@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <div class="jumbotron jumbotron-fluid card card-image" style="background-image: url(static/image/header.png);">
+        <div class="row justify-content-center mt-5 pb-4">
+            <div class="col-md-6">
+                <div class="jumbotron shadow py-4 mb-5">
+                    <h1 class="text-center text-info">Searching for books here</h1>
+                    <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}">
+                        <input class="form-control flex-grow-1 my-1 mr-sm-2" id="inlineFormCategorySelect" name="search">
+                        <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5 pb-4">
+      <h1 class="text-info">Welcome to Link Book Store!</h1>
+    </div>
+    <div class="row justify-content-center mt-5 pb-4">
+      <h3>Start from choose a category below!</h3>
+    </div>
+   
+{% endblock %}
+
+
+{% block main %}
+        <section>
+            <div>
+                <h1 class="text-info font-weight-light">Hot categories</h1>
+            </div>
+
+            <div class="card-deck">
+              {% for category in categories %}
+                <div class="card">
+                    <img class="card-img-top" src="{{url_for('static', filename='image/'+category.image)}}" alt="Card image" style="height: 300px;">
+                    <div class="card-body">
+                      <h3 class="card-title">{{category.name}}</h3>
+                      <p class="card-text">{{category.description}}</p>
+                      <p class="card-text"><small class="text-muted">2 items</small></p>
+                    </div>
+                    <div class="card-footer">
+                      <a href="{{url_for('main.booklist', categoryid=category.id)}}" class="btn btn-primary">Entry</a>
+                    </div>
+                  </div>
+              {% endfor %}
+            </div>
+        </section>
+{% endblock %}

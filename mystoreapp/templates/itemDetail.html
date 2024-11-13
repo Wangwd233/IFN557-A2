@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    {% for book in item %}
+    <h1 class="text-info">{{book.bookName}}</h1>
+    <h3 class="font-weight-bold">By: {{book.author}}</h3>
+    <h3 class="font-weight-bold">Price: ${{book.price}}</h3>
+    <img src="{{url_for('static', filename='image/'+book.image)}}" alt="secret history">
+    <hr />
+    <h3 class="font-weight-bold">Description: </h3>
+    <h4 class="font-weight-normal">
+        {{book.description}}
+    </h4>
+    <hr />
+
+    <!--form for add book to the basket-->
+    <form action="{{url_for('main.order')}}">
+        <input type="hidden" id="id" name="book_id" value="{{book.id}}">
+        <input type="submit" value="Add to basket" class="btn btn-primary mb-3">
+    </form>
+    {% endfor %}
+    <!--<button href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add to basket</button>-->
+
+    <!-- Modal -->
+    <!--<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body text-warning">
+                This item has been added to your basket successfully!
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Continue shopping</button>
+            </div>
+        </div>
+        </div>
+    </div>-->
+{% endblock %}
+   

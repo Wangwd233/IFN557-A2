@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block main %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Check Out Form</h1>
+                    <p>Thank you for shopping at Link Book Store, please provide your contact detail below!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{wtf.quick_form(form)}}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

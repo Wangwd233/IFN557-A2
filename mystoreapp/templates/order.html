@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!--display content for user basket-->
+<section>
+    <div class="container">
+        <div class="row co-12 d-flex mt-2 mb-2">
+            <h3>Basket</h3>
+        </div>
+    </div>
+
+    <!--display all item in the basket-->
+    {% for book in order.books %}
+        <div class="row shadow-md my-row mb-3">
+            <div class="col-sm-10 card">
+                <h5 class="card-header">Book Name: {{book.bookName}} Author: {{book.author}} ISBN: {{book.isbn}} </h5>
+                <div class="card_body">
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="img-thumbnail" src="{{url_for('static', filename=('image/' + book.image))}}">
+                        </div>
+                        <div class="col-10">
+                            <p class="card-text"> {{book.description}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <!--show price and delete button on the right of the container-->
+            <div class="col-sm-2">
+                <!--price-->
+                <h5>${{book.price}} </h5>
+                <!--delete button-->
+                <form method="POST" action="{{url_for('main.deleteorderitem')}}">
+                    <input type="hidden" id="id" name="id" value="{{book.id}}">
+                    <input type="submit" value="Delete" class="btn btn-primary mb-3">
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+    <hr>
+    <h4 class="text-primary">Total Cost: ${{totalprice}}</h4>
+    <hr>
+    <a href="{{url_for('main.checkout')}}" class="btn btn-primary mb-3">Check Out</a>
+    <a href="{{url_for('main.deleteorder')}}" class="btn btn-primary mb-3">Delete All Items</a>
+</section>
+{% endblock %}
